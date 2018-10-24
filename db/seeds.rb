@@ -7,22 +7,19 @@ House.delete_all()
 
 
 house1 = House.new({
-  'house_name' => 'Gryffindor',
-  'logo' =>  'https://i.pinimg.com/originals/d1/e8/53/d1e853a51cc4f6b25a9f96914e04b992.png'
+  'house_name' => 'Gryffindor'
 })
+
 house2 = House.new({
-  'house_name' => 'Slytherin',
-  'logo' =>  'https://vignette.wikia.nocookie.net/csydes-test/images/4/45/Slytherin_Crest.png/revision/latest?cb=20171101063219'
+  'house_name' => 'Slytherin'
 })
 
 house3 = House.new({
-  'house_name' => 'Ravenclaw',
-  'logo' =>  'https://vignette.wikia.nocookie.net/harrypotter/images/6/6c/Ravenclaw%E2%84%A2_Crest_%28Painting%29.png/revision/latest?cb=20091129184403'
+  'house_name' => 'Ravenclaw'
 })
 
 house4 = House.new({
-  'house_name' => 'Hufflepuff',
-  'logo' =>  'https://vignette.wikia.nocookie.net/harrypotter/images/3/30/Hufflepuff%E2%84%A2_Crest_%28Painting%29.png/revision/latest?cb=20091129184403'
+  'house_name' => 'Hufflepuff'
 })
 
 house1.save()

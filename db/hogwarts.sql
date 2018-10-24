@@ -1,11 +1,9 @@
 DROP TABLE students;
 DROP TABLE houses;
 
-
 CREATE TABLE houses (
   id SERIAL4 PRIMARY KEY,
-  house_name VARCHAR(255),
-  logo NVARCHAR(max)
+  house_name VARCHAR(255)
 );
 
 CREATE TABLE students (

@@ -1,4 +1,5 @@
 require_relative('../db/sql_runner')
+require_relative('house')
 
 class Student
 
@@ -60,24 +61,8 @@ class Student
       values = [@house_id]
       house = SqlRunner.run( sql, values )
       result = house.map{ |house| House.new(house)}
-      return result
+      return result[0]
     end
 
-     # def house_logo()
-     #   logo = @student.house()
-     #   logo[2]
-     # end
-
-
-
-#     def customers()
-#   sql = "SELECT houses.* FROM students
-#   LEFT JOIN houses
-#   WHERE film_id = $1"
-#   values = [@id]
-#   customers = SqlRunner.run(sql, values)
-#   result = customers.map{ |customer| Customer.new(customer)}
-#   return result
-# end
 
   end
