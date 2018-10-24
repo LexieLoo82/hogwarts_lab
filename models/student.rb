@@ -3,76 +3,74 @@ require_relative('../db/sql_runner')
 class Student
 
   attr_reader :id
-  attr_accessor :first_name, :last_name, :house_name, :age
+  attr_accessor :first_name, :last_name, :house_id, :age
 
   def initialize( options )
     @id = options['id'].to_i if options['id']
     @first_name = options['first_name']
     @last_name = options['last_name']
-    @house_name = options['house_name']
-    @age = options['age'].to_i
+    @house_id = options['house_id'].to_i
+    @age = options['age']
   end
 
 
   def save()
-    sql = "INSERT INTO students (
-      first_name,
-      last_name,
-      house_name,
-      age
-    )
-    VALUES
-    (
-      $1, $2, $3, $4
-    )
-    RETURNING id"
-    values = [@first_name, @last_name, @house_name, @age]
+    sql= "INSERT INTO students (first_name, last_name, house_id, age)
+    VALUES ($1, $2, $3, $4) RETURNING id"
+    values = [@first_name, @last_name, @house_id, @age]
     student = SqlRunner.run(sql, values)
-    @id = student['id'].to_i
+    @id = student.first['id'].to_i
+    # why!????!!
   end
-  #
-  # def update()
-  #   sql = "UPDATE pizza_orders
-  #   SET
-  #   (
-  #     first_name,
-  #     last_name,
-  #     topping,
-  #     quantity
-  #   ) =
-  #   (
-  #     $1, $2, $3, $4
-  #   )
-  #   WHERE id = $5"
-  #   values = [@first_name, @last_name, @topping, @quantity, @id]
-  #   SqlRunner.run( sql, values )
-  # end
-  #
-  # def self.delete_all()
-  #   sql = "DELETE FROM pizza_orders;"
-  #   SqlRunner.run(sql)
-  # end
-  #
-  # def delete()
-  #   sql = "DELETE FROM pizza_orders
-  #   WHERE id = $1"
-  #   values = [@id]
-  #   SqlRunner.run( sql, values )
-  # end
-  #
-  # def self.all()
-  #   sql = "SELECT * FROM pizza_orders"
-  #   pizzas = SqlRunner.run( sql )
-  #   result = pizzas.map { |pizza| PizzaOrder.new( pizza ) }
-  #   return result
-  # end
-  #
-  # def self.find( id )
-  #   sql = "SELECT * FROM pizza_orders WHERE id = $1"
-  #   values = [id]
-  #   pizza = SqlRunner.run( sql, values )
-  #   result = PizzaOrder.new( pizza.first )
-  #   return result
-  # end
 
-end
+  def name()
+    return "#{@first_name} #{@last_name}"
+  end
+
+
+    def self.delete_all()
+      sql = "DELETE FROM students;"
+      SqlRunner.run(sql)
+    end
+
+    def delete()
+      sql = "DELETE FROM students
+      WHERE id = $1"
+      values = [@id]
+      SqlRunner.run( sql, values )
+    end
+
+    def self.all()
+      sql = "SELECT * FROM students"
+      students = SqlRunner.run( sql )
+      result = students.map { |student| Student.new( student ) }
+      return result
+    end
+
+    def self.find( id )
+      sql = "SELECT * FROM students WHERE id = $1"
+      values = [id]
+      student = SqlRunner.run( sql, values )
+      result = Student.new( student.first )
+      return result
+    end
+
+    def house()
+      sql = "SELECT * FROM houses WHERE houses.id = $1"
+      values = [@house_id]
+      house = SqlRunner.run( sql, values )
+      result = house.map{ |house| House.new(house)}
+      return result
+    end
+
+#     def customers()
+#   sql = "SELECT houses.* FROM students
+#   LEFT JOIN houses
+#   WHERE film_id = $1"
+#   values = [@id]
+#   customers = SqlRunner.run(sql, values)
+#   result = customers.map{ |customer| Customer.new(customer)}
+#   return result
+# end
+
+  end
