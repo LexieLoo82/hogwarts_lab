@@ -63,6 +63,13 @@ class Student
       return result
     end
 
+     # def house_logo()
+     #   logo = @student.house()
+     #   logo[2]
+     # end
+
+
+
 #     def customers()
 #   sql = "SELECT houses.* FROM students
 #   LEFT JOIN houses

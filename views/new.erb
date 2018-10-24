@@ -11,10 +11,14 @@
 
   <li><label for="House">Select a House:</label>
   <select id="House" name="house_id">
-    <option value="Gryffindor">Gryffindor</option>
+    <% for house in @houses%>
+    <option value ="<%=house.id%>" > <%= house.house_name %> </option>
+    <%end%>
+
+    <!-- <option value="Gryffindor">Gryffindor</option>
     <option value="Slytherin">Slytherin</option>
     <option value="Hufflepuff">Hufflepuff</option>
-    <option value="Ravenclaw">Ravenclaw</option>
+    <option value="Ravenclaw">Ravenclaw</option> -->
   </select></li>
 
   <input type="submit" value="Add Student"/>

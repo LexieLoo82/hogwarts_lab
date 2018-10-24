@@ -2,6 +2,7 @@ require( 'sinatra' )
 require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
 require_relative('./models/student')
+require_relative('./models/house')
 
 get "/" do
   erb(:home)
@@ -13,6 +14,7 @@ get '/students' do
 end
 
 get '/students/new' do
+  @houses = House.all()
 erb (:new)
 end
 
@@ -21,36 +23,3 @@ post '/students' do
   @student.save()
   redirect to '/students'
 end
-
-# get '/pizza-orders/new' do
-# erb (:new)
-# end
-#
-# post '/pizza-orders' do
-#   @order = PizzaOrder.new(params)
-#   @order.save()
-#   erb(:create)
-# end
-#
-# get '/pizza-orders/:id' do
-#   id = params['id']
-#   @order = PizzaOrder.find(id)
-#   erb(:show)
-# end
-#
-# get '/pizza-orders/edit/:id' do
-#   id = params['id']
-#   @order = PizzaOrder.find(id)
-#  erb (:edit)
-# end
-#
-# post '/pizza-orders/:id' do
-# PizzaOrder.new(params).update()
-# redirect to "/pizza-orders"
-# end
-#
-# post "/pizza-orders/:id/delete" do
-#    order = PizzaOrder.find(params[:id])
-#    order.delete()
-#    redirect to "/pizza-orders"
-# end
